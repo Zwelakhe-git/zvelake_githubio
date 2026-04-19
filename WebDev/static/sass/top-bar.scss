@@ -1,0 +1,29 @@
+
+
+.top-bar {
+    padding: 5px 10px;
+    border: 1px solid #ebe4e4;
+    position: sticky;
+    top: 0px;
+    background: white;
+    z-index: 1000;
+
+    &-content {
+        justify-content: space-between;
+        align-items: center;
+
+        & .bin-btn .bin-count:not(.disabled){
+            width: 19px;
+            height: 19px;
+            top: 10%;
+            right: 0px;
+            --text: white;
+            font-weight: 700;
+            background: #ff0000;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 13px;
+            z-index: 10;
+        }
+    }
+}

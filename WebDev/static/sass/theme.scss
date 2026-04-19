@@ -1,0 +1,81 @@
+/*
+* когда изменяем фон элементы, которые должны адаптировать:
+* тест
+* фон контейнеров
+* фон полей ввода
+* границы элементов
+*/
+:root, body{
+    --light-theme: #ffffff;
+    --dark-theme: #212020;
+    --light-theme-text: black;
+    --dark-theme-text: #ededed;
+    --light-theme-box-bg: #ffffff;
+    --dark-theme-box-bg: #535252;
+    --light-theme-box-shadow: 0px 0px 6px #bbbbbb;
+    --dark-theme-box-shadow: 0px 0px 2px #1c1c1c;
+    --button-primary: #125bec;
+    --button-secondary: #dcdcdc;
+
+    /* colors */
+    /*
+    blacks
+    */
+    --black-500: #000000;
+    --black-400: #383737;
+    --black-300: #555454;
+    --black-200: #808080;
+
+    /*
+    reds
+    */
+    --red-500: #ff0000;
+    --red-400: #ac0808;
+    --red-300: #aa0909;
+    --red-200: #740505;
+
+    /*
+     параметры по умолчанию
+    */
+    --page-bg: var(--light-theme);
+    --primary: var(--light-theme-text);
+    --text: var(--light-theme-text);
+    --box-bg-color: var(--light-theme-box-bg);
+    --box-shadow: var(--light-theme-box-shadow);
+    --button-bg: var(--button-primary);
+    --box-header-color: #bfbfbf;
+
+    /* border radii */
+    --corner-shape-8: 8px;
+    --corner-shape-9: 9px;
+    --corner-shape-10: 10px;
+    --corner-shape-9x: 999px;
+    --corner-shape-50: 50%;
+}
+html{
+    font-family: var(--default-font);
+}
+*{
+    color: var(--text);
+    position: relative;
+}
+body{
+    background: var(--page-bg);
+    margin: 0px;
+    min-height: 100vh;
+}
+body.dark-theme{
+    --page-bg: var(--dark-theme);
+    --box-shadow: var(--dark-theme-box-shadow);
+    --box-header-color: #616161;
+
+}
+.dark-theme{
+    --text: var(--dark-theme-text);
+    --box-bg-color: var(--dark-theme-box-bg);
+}
+
+.box, .box-wrap, .box-container{
+    box-shadow: var(--box-shadow);
+    background: var(--box-bg-color);
+}

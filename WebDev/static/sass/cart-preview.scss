@@ -1,0 +1,22 @@
+@use "./global-mixins.scss" as mixins;
+
+.cart-preview .products-list .product{
+    grid-template-columns: 1fr 3fr;
+
+    & .image-container{
+        width: 150px;
+        height: 150px;
+        margin: auto;
+    }
+    & .product-actions button{
+        width: 30px;
+        height: 30px;
+        border-radius: 8px;
+        --button-bg: #f3f0f09f;
+        border: 1px solid grey;
+    }
+    
+    & .category{
+        --text: #13ad0b;
+    }
+}

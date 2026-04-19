@@ -1,0 +1,103 @@
+@use "./global-mixins.scss" as mixins;
+
+.form{
+    padding: 10px 20px;
+    gap: 15px;
+
+    @include mixins.mobile(){
+        flex-direction: column;
+
+        & > *{
+            width: 100%;
+        }
+    }
+
+    & > * {
+        margin-bottom: 20px;
+    }
+
+    &-section{
+        box-shadow: 0px 0px 5px #e7d0d0;
+        padding: 20px;
+        border-radius: 10px;
+
+        &-title{
+            align-items: center;
+            & *{
+                font-weight: 500;
+            }
+            & .icon{
+                color: #0080ff;
+            }
+        }
+    }
+}
+
+.field{
+    margin-bottom: 20px;
+}
+
+.label{
+    font-weight: 700;
+}
+
+input[type=text]{
+    border-radius: 8px;
+    padding: 10px;
+    border: 1px solid rgb(159, 153, 153);
+    width: 100%;
+    text-align: left;
+
+    &:focus{
+        outline: 2px solid rgb(0, 115, 255);
+    }
+}
+
+.input-box{
+    border-radius: 8px;
+    padding: 5px;
+    border: 1px solid rgb(159, 153, 153);
+    width: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    & i{
+        --text: rgb(187, 178, 178);
+    }
+
+    &:focus{
+        outline: 2px solid rgb(0, 115, 255);
+    }
+
+    & input[type=text]{
+        outline: none;
+        border: none;
+        padding: 5px;
+
+        &:focus{
+            outline: none;
+        }
+    }
+}
+.divider{
+    width: 100%;
+    border: 1px solid rgb(227 227 227);
+}
+
+.order-summary{
+    margin-bottom: 10px;
+}
+.order-info .list-item{
+    justify-content: space-between;
+}
+
+.summary-item{
+    justify-content: space-between;
+    align-items: center;
+}
+
+button[type=submit]{
+    font-weight: 600;
+}
