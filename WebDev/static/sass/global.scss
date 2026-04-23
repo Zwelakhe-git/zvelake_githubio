@@ -47,7 +47,6 @@ h1,h2,h3,h4,h5,h6{
     background-color: var(--button-bg);
     border: none;
     transform: scale(1.0);
-    transition: transform 0.3s linear;
     cursor: pointer;
 
     &:active{
@@ -99,6 +98,18 @@ h1,h2,h3,h4,h5,h6{
     &.between{
         justify-content: space-between;
     }
+
+    &.center{
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.grow-0{
+    flex-grow: 0;
+}
+.shrink-0{
+    flex-shrink: 0;
 }
 
 .abs{
@@ -117,14 +128,7 @@ h1,h2,h3,h4,h5,h6{
     animation: spin-ani 1s linear 0s infinite;
 }
 
-.link-item{
-    text-align: center;
-    background-color: rgb(242 242 242 / 0%);
 
-    &:hover{
-        background-color: rgb(242 242 242 / 100%);
-    }
-}
 .col-md-8{
     width: calc(100% * (2/3));
 }
@@ -141,8 +145,14 @@ h1,h2,h3,h4,h5,h6{
 .sticky{
     position: sticky;
 }
+.fixed{
+    position: fixed;
+}
 .overflow-auto{
     overflow: auto;
+}
+.no-overflow{
+    overflow: hidden;
 }
 .bold{
     font-weight: bold;
@@ -157,4 +167,15 @@ h1,h2,h3,h4,h5,h6{
     --text: #ff0000d5;
 }
 
-.spacer{}
+.spacer{
+    height: var(--spacer-h);
+}
+.m-auto{
+    margin: auto;
+}
+.modal{
+    z-index: 1000;
+}
+.clickable{
+    cursor: pointer;
+}
