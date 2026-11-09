@@ -1,21 +1,38 @@
 import { useState, useRef, useCallback } from 'react';
 
-export const useAudioRecorder = () => {
-  const [isRecording, setIsRecording] = useState(false);
-  const [recordingTime, setRecordingTime] = useState(0);
-  const [audioBlob, setAudioBlob] = useState(null);
-  const [error, setError] = useState(null);
+interface audioRecorderType {
+  mimeType: string,
+  isRecording: boolean,
+  recordingTime: number,
+  audioBlob: Blob | null,
+  error: string | null,
+  startRecording: Function,
+  stopRecording: Function,
+  resetRecording: Function
+}
+
+export const useAudioRecorder = (): audioRecorderType => {
+  const [isRecording, setIsRecording] = useState<boolean>(false);
+  const [recordingTime, setRecordingTime] = useState<number>(0);
+  const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [mimeType, setMimeType] = useState<string>('audio/webm');
   
-  const mediaRecorderRef = useRef(null);
-  const audioChunksRef = useRef([]);
-  const timerRef = useRef(null);
+  const mediaRecorderRef = useRef<MediaRecorder>(null);
+  const audioChunksRef = useRef<Blob[]>([]);
+  const timerRef = useRef<number>(null);
 
   const startRecording = useCallback(async () => {
     try {
+      if(MediaRecorder.isTypeSupported('audio/webm')){
+        setMimeType('audio/mp4');
+      } else {
+        setMimeType('audio/webm');
+      }
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       
       const mediaRecorder = new MediaRecorder(stream, {
-        mimeType: MediaRecorder.isTypeSupported('audio/webm') ? 'audio/webm' : 'audio/mp4',
+        mimeType: mimeType,
       });
       
       mediaRecorderRef.current = mediaRecorder;
@@ -28,10 +45,8 @@ export const useAudioRecorder = () => {
       };
       
       mediaRecorder.onstop = () => {
-        const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
+        const audioBlob = new Blob(audioChunksRef.current, { type: mimeType });
         setAudioBlob(audioBlob);
-        
-        // Stop all tracks
         stream.getTracks().forEach(track => track.stop());
       };
       
@@ -69,6 +84,7 @@ export const useAudioRecorder = () => {
   }, []);
 
   return {
+    mimeType,
     isRecording,
     recordingTime,
     audioBlob,
