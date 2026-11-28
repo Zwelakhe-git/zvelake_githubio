@@ -1,0 +1,50 @@
+# postgres.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: db                    # matches the hostname your app already uses
+spec:
+  clusterIP: None             # headless — required for the StatefulSet
+  selector:
+    app: postgres
+  ports:
+    - port: 5432
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres
+spec:
+  serviceName: db
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:16-alpine
+          env:
+            - name: POSTGRES_USER
+              value: courier_user
+            - name: POSTGRES_PASSWORD
+              value: courier_pass
+            - name: POSTGRES_DB
+              value: courier_db
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql/data
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 2Gi
